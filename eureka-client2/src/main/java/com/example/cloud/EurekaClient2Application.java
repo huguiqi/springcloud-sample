@@ -1,12 +1,11 @@
 package com.example.cloud;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.context.annotation.ComponentScan;
 
-@RestController
 @SpringBootApplication
+@ComponentScan(basePackages = "com.example.controller")
 public class EurekaClient2Application {
 
 	public static void main(String[] args) {
@@ -14,11 +13,4 @@ public class EurekaClient2Application {
 	}
 
 
-	@Value("${server.port}")
-	String port;
-	@RequestMapping("/hi")
-	public String home(@RequestParam String name) {
-		return
-				"hi "+name+",i am from port:" +port;
-	}
 }

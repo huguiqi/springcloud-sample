@@ -9,16 +9,19 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 @SpringBootApplication
+@EnableDiscoveryClient
+@RestController
+@ComponentScan(basePackages = "com.example.*")
 public class EurekaClientApplication {
 
 	public static void main(String[] args) {
-//		SpringApplication.run(EurekaClientApplication.class, args);
-		new SpringApplicationBuilder(EurekaClientApplication.class).web(true).run(args);
+		SpringApplication.run(EurekaClientApplication.class, args);
+//		new SpringApplicationBuilder(EurekaClientApplication.class).web(true).run(args);
 	}
 
 

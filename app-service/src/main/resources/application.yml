@@ -37,7 +37,10 @@ fail-fast: true
 #ribbon:
 #  restclient:
 #      enabled: true
-#
-#feign:
-#  hystrix:
-#    enabled: true
+
+# 启用feign
+feign:
+  hystrix:
+    enabled: true
+
+logging.level.project.user.UserClient: DEBUG
