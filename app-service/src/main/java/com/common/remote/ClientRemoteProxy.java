@@ -15,6 +15,7 @@ public class ClientRemoteProxy {
     RestTemplate restTemplate;
 
     public String hello(String name) {
+        //request
         return restTemplate.getForObject("http://APPCLIENT/hello?name="+name,String.class);
     }
 }

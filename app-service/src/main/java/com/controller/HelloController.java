@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
+    public static final String TIME_OUT = "execution.isolation.thread.timeoutInMilliseconds";
     @Autowired
     HelloService helloService;
 
     @Autowired
     ClientRemoteProxy clientRemoteProxy;
-
 
     @RequestMapping(value = "/hi")
     public String hi(@RequestParam String name){
@@ -32,11 +32,13 @@ public class HelloController {
 
     @RequestMapping(value = "/hello/{name}")
     @HystrixCommand(fallbackMethod = "error", commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+            @HystrixProperty(name = TIME_OUT, value = "3000")
             , @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2")})
     public String hello(@PathVariable(value = "name") String name){
         return clientRemoteProxy.hello(name);
     }
+
+
 
     public String error(String name){
         return name+"：您所调用的接口服务不可用，请重试";

@@ -31,8 +31,6 @@ public class HelloService {
         for (int i = 0; i < instances.size(); i++) {
             System.out.println("/hello,host:" + instances.get(i).getHost() + ",service_id:" + instances.get(i).getServiceId());
         }
-//        String ret = restTemplate.getForObject("http://APPCLIENT/hi?name="+name, String.class);
-//        System.out.println("response  = " + ret);
-
+        //只是打印出来
     }
 }
