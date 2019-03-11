@@ -4,30 +4,30 @@ server:
 spring:
   application:
     name: registerCloudServer
-  cloud:
-    config:
-      uri: http://localhost:8761/
-      label: master
+#  cloud:
+#    config:
+#      uri: http://localhost:8761/
+#      label: master
 
 
 
 eureka:
+  environment: test
   instance:
     hostname: localhost
-    prefer-ip-address: true
+    prefer-ip-address: false
     instance-id: ${eureka.instance.hostname}:${server.port}
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
   client:
-        #默认情况下，应用会向注册中心（也是它自己）注册它自己，设置为false表示禁止这种默认行为
-    register-withEureka: false
-        #表示不去检索其他的Eureka Server获取注册信息，因为服务注册中心本身的职责就是维护服务实例，它也不需要去检索其他服务
+    register-withEureka: true
     fetch-registry: false
+    prefer-same-zone-eureka: true
+    region: SH
+    availability-zones:
+          SH: zone-test,zone-dev
     service-url:
-        #对外暴露的地址
-      defaultZone: http://localhost:8761/eureka/
+          zone-test: http://localhost:8761/eureka/
+          zone-dev: http://localhost:8762/eureka/
 
-spring.cloud.vault.discovery:
-    enabled: true
-    service-id: my-server
 
-spring.cloud.vault:
-    config.lifecycle.enabled: true
